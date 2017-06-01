@@ -1,16 +1,16 @@
 # DbSchema Dockerize
 
-- For build Dbschema:
+- Build Dbschema:
 ```
 ./build.sh
 ```
 
-- For run:
+- Run:
 ```
 ./run.sh
 ```
 
-You can download from docker hub:
+You can pull from docker hub:
 
 ```
 docker pull marcelino/dbschema

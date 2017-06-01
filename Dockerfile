@@ -1,13 +1,10 @@
-
 # Run as :
-# docker run -it --rm -e DISPLAY=$DISPLAY --net=host  -v /tmp/.X11-unix:/tmp/.X11-unix container-name
-FROM debian:stretch
+# docker run -it --rm -e DISPLAY=$DISPLAY --net=host  -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME:/home/dbschema/home marcelino/dbschema
 
-RUN apt-get -y update && apt-get install -y
+FROM debian:stretch
 
 ENV HOME /home/dbschema
 ENV USER dbschema
-
 
 RUN apt-get update && apt-get install -y \
         default-jre \
@@ -17,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 ADD  DbSchema $HOME/.src
 RUN  chown -R $USER:$USER $HOME
-VOLUME  $HOME
+
 USER    $USER
 WORKDIR $HOME
 

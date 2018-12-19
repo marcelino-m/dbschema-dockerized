@@ -1,7 +1,13 @@
 #!/bin/bash
 
-DOCKERUSER=${1:-marcelino}
+DOCKERUSER=marcelino
+MAJOR=8
+MINOR=1
+PATCH=0
 
-wget http://www.dbschema.com/download/DbSchema_unix_7_5_1.tar.gz -O dbschema.tar.gz
-tar xvf dbschema.tar.gz
-docker build -t "$DOCKERUSER"/dbschema:v7.5.1 -t "$DOCKERUSER"/dbschema:latest .
+if [ ! -f dbschema_${MAJOR}_${MINOR}_${PATCH}.tar.gz ]; then
+    curl -L https://www.dbschema.com/download/DbSchema_unix_${MAJOR}_${MINOR}_${PATCH}.tar.gz --output dbschema_${MAJOR}_${MINOR}_${PATCH}.tar.gz
+    tar xvf dbschema_${MAJOR}_${MINOR}_${PATCH}.tar.gz
+fi
+
+docker build -t "$DOCKERUSER"/dbschema:v${MAJOR}.${MINOR}.${PATCH} -t "$DOCKERUSER"/dbschema:latest .
